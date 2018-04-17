@@ -1,0 +1,32 @@
+<form action="javascript:calc()">
+  <input id="intt" placeholder="stop ">
+  <input id="inti" type="number" placeholder="index of">
+  <input type="submit" value="calculate">
+</form>
+<script>
+  function calc() {
+    var a = [1];
+    var addInt = [];
+    var intt = document.getElementById("intt").value;
+    for( i = 0; i < intt; i++ ) {
+      var arrayL = a.length;
+      for( b = 0; b < arrayL; b++ ) {
+        var newE = a[b];
+        a.push( newE * -1 );
+      }
+    }
+
+    var countT = 1;
+    for( i = 0; i < intt; i++ ) {
+      var inti = document.getElementById("inti").value;
+      var powerOverResult = Math.pow( countT , inti );
+      addInt.push(powerOverResult * a[countT - 1]);
+      countT += 1;
+    }
+    var resultSum = 0;
+    for( i = 0; i < addInt.length; i++ ) {
+      resultSum += addInt[i];
+    }
+    document.body.innerHTML += "<p><strong>" + intt + " times, power of " + inti + ".</strong></p><p>(" + addInt.join(") + (") + ") = " + resultSum + "</p>";
+  }
+</script>
