@@ -1,9 +1,30 @@
 <form action="javascript:calc()">
-  <input id="intt" placeholder="stop ">
+  <h3>Normal Calculator</h3>
+  <input id="intt" placeholder="stop at">
   <input id="inti" type="number" placeholder="index of">
   <input type="submit" value="calculate">
 </form>
+<form action="javascript:qwcalc()">
+  <h3>QW Calculator</h3>
+  <input id="inta" placeholder="enter array">
+  <input id="intit" type="number" placeholder="index of">
+  <input type="submit" value="calculate">
+</form>
 <script>
+  function qwcalc() {
+    var arrayS = document.getElementById("inta").value;
+    var powy = document.getElementById("intit").value;
+    var a = arrayS.split(",");
+    var sumEle = [];
+    for( i = 0; i < a.length; i++ ) {
+      sumEle.push( Math.pow((i + 1),parseInt(powy)) * parseInt(a[i]) );
+    }
+    var resultS = 0;
+    for( i = 0; i < sumEle.length; i++ ) {
+      resultS += sumEle[i];
+    }
+    document.body.innerHTML += "<p><strong>" + arrayS + " times, power of " + powy + ".</strong></p><p>(" + sumEle.join(") + (") + ") = " + resultS + "</p>";
+  }
   function calc() {
     var a = [1];
     var addInt = [];
