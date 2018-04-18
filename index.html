@@ -10,7 +10,59 @@
   <input id="intit" type="number" placeholder="index of">
   <input type="submit" value="calculate">
 </form>
+<form action="javascript:fSum()">
+  <h3>get equation</h3>
+  <input id="sumValue" placeholder="enter sum">
+  <input id="conValue" placeholder="stop at">
+  <input id="indValue" placeholder="index of">
+  <input type="submit" placeholder="find equation">
+</form>
 <script>
+  function fSum() {
+    console.log("initialized calculation");
+    var conValue = parseInt(document.getElementById("conValue").value);
+    var indValue = parseInt(document.getElementById("indValue").value);
+    var sumValue = parseInt(document.getElementById("sumValue").value);
+    var plusMinusA = [];
+    var finalA = [];
+    for( i = 0; i < conValue; i++ ) {
+      plusMinusA.push(1);
+      finalA.push(-1);
+    }
+    console.log(plusMinusA.length);
+    for ( i = 0; i < Math.pow(2,plusMinusA.length)-1; i++ ) {
+      if( plusMinusA[plusMinusA.length - 1] == 1 ) {
+        plusMinusA[plusMinusA.length - 1] = -1;
+      } else {
+        plusMinusA[conValue - 1] = 1;
+        for( k = 0; k < plusMinusA.length - 2; k++ ) {
+          var pleib = k + 2;
+          if(plusMinusA[plusMinusA.length - pleib] == 1 ) {
+            plusMinusA[plusMinusA.length - pleib] = -1;
+          } else {
+            plusMinusA[plusMinusA.length - pleib] = 1;
+            plusMinusA[plusMinusA.length - pleib - 1] = -1;
+          }
+        }
+      }
+      var resultLength = 0;
+      for( i = 0; i < plusMinusA.length; i++ ) {
+        resultLength += Math.pow(i+1,indValue) * plusMinusA[i];
+      }
+      if( resultLength == sumValue ) {
+        alert("equation found with array " + plusMinusA );
+      } else if ( resultLength == finalA ) {
+        alert("wow. you were STUPID AF!");
+      }
+      document.body.innerHTML += '<p>' + plusMinusA + '</p>';
+      plusMinusA = [];
+      finalA = [];
+      conValue = 0;
+      indValue = 0;
+      sumValue = 0;
+      
+    }
+  }
   function qwcalc() {
     var arrayS = document.getElementById("inta").value;
     var powy = document.getElementById("intit").value;
