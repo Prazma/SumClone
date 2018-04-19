@@ -1,19 +1,26 @@
+<form action="javascript:clone()">
+  <h3>Normal Clone Calculation</h3>
+  <input id="inttNO" placeholder="stop at">
+  <input id="pwof" placeholder="index of">
+  <input type="submit" value="Create Clone">
+</form>
+
 <form action="javascript:calc()">
-  <h3>Normal Calculator</h3>
+  <h3>Climb Clone Calculation</h3>
   <input id="intt" placeholder="stop at">
   <input id="inti" type="number" placeholder="index of">
-  <input type="submit" value="calculate">
+  <input type="submit" value="Calculate">
 </form>
 
 <form action="javascript:qwcalc()">
-  <h3>QW Calculator</h3>
+  <h3>Custom Array Calculator</h3>
   <input id="inta" placeholder="enter array">
   <input id="intit" type="number" placeholder="index of">
-  <input type="submit" value="calculate">
+  <input type="submit" value="Calculate">
 </form>
 
 <form action="javascript:fSum()">
-  <h3>get equation</h3>
+  <h3>Get Equation from Sum</h3>
   <input id="sumValue" placeholder="enter sum">
   <input id="conValue" placeholder="stop at">
   <input id="indValue" placeholder="index of">
@@ -21,6 +28,19 @@
 </form>
 
 <script>
+  function clone() {
+    var a = [1];
+    var intt = document.getElementById("inttNO").value;
+    var pwof = document.getElementById("pwof").value;
+    for( i = 0; i < intt; i++ ) {
+      var arrayL = a.length;
+      for( b = 0; b < arrayL; b++ ) {
+        var newE = a[b];
+        a.push( Math.pow(newE * -1,pwof) );
+      }
+    }
+    document.body.innerHTML += "<p><strong>Clone :</strong></p><p>" + a + "</p>";
+  }
   function fSum() {
     console.log("initialized calculation");
     var conValue = parseInt(document.getElementById("conValue").value);
