@@ -4,12 +4,14 @@
   <input id="inti" type="number" placeholder="index of">
   <input type="submit" value="calculate">
 </form>
+
 <form action="javascript:qwcalc()">
   <h3>QW Calculator</h3>
   <input id="inta" placeholder="enter array">
   <input id="intit" type="number" placeholder="index of">
   <input type="submit" value="calculate">
 </form>
+
 <form action="javascript:fSum()">
   <h3>get equation</h3>
   <input id="sumValue" placeholder="enter sum">
@@ -17,6 +19,7 @@
   <input id="indValue" placeholder="index of">
   <input type="submit" placeholder="find equation">
 </form>
+
 <script>
   function fSum() {
     console.log("initialized calculation");
@@ -29,7 +32,7 @@
       plusMinusA.push(1);
       finalA.push(-1);
     }
-    console.log(plusMinusA.length);
+    console.log(Math.pow(2,plusMinusA.length));
     for ( i = 0; i < Math.pow(2,plusMinusA.length)-1; i++ ) {
       if( plusMinusA[plusMinusA.length - 1] == 1 ) {
         plusMinusA[plusMinusA.length - 1] = -1;
@@ -45,22 +48,23 @@
           }
         }
       }
+      console.log("i is " + i);
+      console.log(plusMinusA);
       var resultLength = 0;
-      for( i = 0; i < plusMinusA.length; i++ ) {
-        resultLength += Math.pow(i+1,indValue) * plusMinusA[i];
+      for( r = 0; r < plusMinusA.length; r++ ) {
+        resultLength += Math.pow(r+1,indValue) * plusMinusA[r];
       }
       if( resultLength == sumValue ) {
         alert("equation found with array " + plusMinusA );
       } else if ( resultLength == finalA ) {
-        alert("wow. you were STUPID AF!");
+        alert("no equation found");
       }
-      document.body.innerHTML += '<p>' + plusMinusA + '</p>';
       plusMinusA = [];
       finalA = [];
       conValue = 0;
       indValue = 0;
       sumValue = 0;
-      
+
     }
   }
   function qwcalc() {
@@ -81,7 +85,13 @@
     var a = [1];
     var addInt = [];
     var intt = document.getElementById("intt").value;
-    for( i = 0; i < intt; i++ ) {
+    var cloneI = 0;
+    if( intt > 26 ) {
+      cloneI = 26;
+    } else {
+      cloneI = intt;
+    }
+    for( i = 0; i < cloneI; i++ ) {
       var arrayL = a.length;
       for( b = 0; b < arrayL; b++ ) {
         var newE = a[b];
