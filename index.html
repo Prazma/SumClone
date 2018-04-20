@@ -142,7 +142,6 @@
 		</div>
 		<button id="closeModBtn" onclick='document.getElementById("historyModal").classList.toggle("is-active")' class="modal-close is-large" aria-label="close"></button>
 	</div>
-	
 	<!--script below. still working on it to prevent it from crashing-->
 	<script>
 	window.onload = function() {
@@ -160,7 +159,6 @@
 	}
 
 	function getForm() {
-		document.getElementById("processModal").classList.toggle("is-active");
 		var n = document.getElementById("nVar").value;
 		var nFormula = 1;
 		for (i = 0; i < n; i++) {
@@ -173,11 +171,9 @@
 		document.getElementById("currentModal").classList.toggle("is-active");
 		document.getElementById("currentResults").innerHTML = "<p><strong>Formula result (n = " + n + "):</strong></p>" + nMax;
 		document.getElementById("pastResults").innerHTML += "<p><strong>Formula result (n = " + n + "):</strong></p>" + nMax;
-		document.getElementById("processModal").classList.toggle("is-active");
 	}
 
 	function eqRow() {
-		document.getElementById("processModal").classList.toggle("is-active");
 		var n = document.getElementById("iVar").value;
 		var r = document.getElementById("rVar").value;
 		var demandSum = document.getElementById("sVar").value;
@@ -231,11 +227,9 @@
 			}
 		}
 		document.getElementById("currentModal").classList.toggle("is-active");
-		document.getElementById("processModal").classList.toggle("is-active");
 	}
 
 	function clone() {
-		document.getElementById("processModal").classList.toggle("is-active");
 		var a = [1];
 		var intt = document.getElementById("inttNO").value;
 		var pwof = document.getElementById("pwof").value;
@@ -249,11 +243,9 @@
 		document.getElementById("currentResults").innerHTML = "<p><strong>Clone :</strong></p><p>" + a + "</p>";
 		document.getElementById("pastResults").innerHTML += "<p><strong>Clone :</strong></p><p>" + a + "</p>";
 		document.getElementById("currentModal").classList.toggle("is-active");
-		document.getElementById("processModal").classList.toggle("is-active");
 	}
 
 	function fSum() {
-		document.getElementById("processModal").classList.toggle("is-active");
 		console.log("initialized calculation");
 		var conValue = parseInt(document.getElementById("conValue").value);
 		var indValue = parseInt(document.getElementById("indValue").value);
@@ -299,11 +291,9 @@
 
 		}
 		document.getElementById("currentModal").classList.toggle("is-active");
-		document.getElementById("processModal").classList.toggle("is-active");
 	}
 
 	function qwcalc() {
-		document.getElementById("processModal").classList.toggle("is-active");
 		var arrayS = document.getElementById("inta").value;
 		var powy = document.getElementById("intit").value;
 		var a = arrayS.split(",");
@@ -352,7 +342,6 @@
 		document.getElementById("currentResults").innerHTML += "<p><strong>" + intt + " times, power of " + inti + ".</strong></p><p>(" + addInt.join(") + (") + ") = " + resultSum + "</p>";
 		document.getElementById("pastResults").innerHTML += "<p><strong>" + intt + " times, power of " + inti + ".</strong></p><p>(" + addInt.join(") + (") + ") = " + resultSum + "</p>";
 		document.getElementById("currentModal").classList.toggle("is-active");
-		document.getElementById("processModal").classList.toggle("is-active");
 	}
 
 	function openHist() {
