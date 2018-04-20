@@ -1,135 +1,372 @@
-<form action="javascript:clone()">
-  <h3>Normal Clone Calculation</h3>
-  <input id="inttNO" placeholder="stop at">
-  <input id="pwof" placeholder="index of">
-  <input type="submit" value="Create Clone">
-</form>
+<!doctype html>
+<html>
 
-<form action="javascript:calc()">
-  <h3>Climb Clone Calculation</h3>
-  <input id="intt" placeholder="stop at">
-  <input id="inti" type="number" placeholder="index of">
-  <input type="submit" value="Calculate">
-</form>
+<head>
+	<title>SumClone Calculator</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no">
+	<meta name="author" content="Tomoyoshi Yamamoto">
+	<meta name="description" content="The official calculator for SumClone mathematics project. May crash depending on the device computing power">
+	<link rel="stylesheet" href="https://bulma.io/css/bulma-docs.min.css?v=201804181630">
+	<style>
+	.is-info,
+	.is-primary {
+		max-width: 300px;
+		display: block;
+		margin-bottom: 10px;
+		margin-right: auto;
+		margin-left: auto;
+	}
 
-<form action="javascript:qwcalc()">
-  <h3>Custom Array Calculator</h3>
-  <input id="inta" placeholder="enter array">
-  <input id="intit" type="number" placeholder="index of">
-  <input type="submit" value="Calculate">
-</form>
+	.button {
+		min-width: 300px;
+	}
 
-<form action="javascript:fSum()">
-  <h3>Get Equation from Sum</h3>
-  <input id="sumValue" placeholder="enter sum">
-  <input id="conValue" placeholder="stop at">
-  <input id="indValue" placeholder="index of">
-  <input type="submit" placeholder="find equation">
-</form>
+	.card {
+		margin-top: 50px;
+		weight: 90%;
+		max-width: 500px;
+		border-radius: 6px;
+		margin-right: auto;
+		margin-left: auto;
+	}
 
-<script>
-  function clone() {
-    var a = [1];
-    var intt = document.getElementById("inttNO").value;
-    var pwof = document.getElementById("pwof").value;
-    for( i = 0; i < intt; i++ ) {
-      var arrayL = a.length;
-      for( b = 0; b < arrayL; b++ ) {
-        var newE = a[b];
-        a.push( Math.pow(newE * -1,pwof) );
-      }
-    }
-    document.body.innerHTML += "<p><strong>Clone :</strong></p><p>" + a + "</p>";
-  }
-  function fSum() {
-    console.log("initialized calculation");
-    var conValue = parseInt(document.getElementById("conValue").value);
-    var indValue = parseInt(document.getElementById("indValue").value);
-    var sumValue = parseInt(document.getElementById("sumValue").value);
-    var plusMinusA = [];
-    var finalA = [];
-    for( i = 0; i < conValue; i++ ) {
-      plusMinusA.push(1);
-      finalA.push(-1);
-    }
-    console.log(Math.pow(2,plusMinusA.length));
-    for ( i = 0; i < Math.pow(2,plusMinusA.length)-1; i++ ) {
-      if( plusMinusA[plusMinusA.length - 1] == 1 ) {
-        plusMinusA[plusMinusA.length - 1] = -1;
-      } else {
-        plusMinusA[conValue - 1] = 1;
-        for( k = 0; k < plusMinusA.length - 2; k++ ) {
-          var pleib = k + 2;
-          if(plusMinusA[plusMinusA.length - pleib] == 1 ) {
-            plusMinusA[plusMinusA.length - pleib] = -1;
-          } else {
-            plusMinusA[plusMinusA.length - pleib] = 1;
-            plusMinusA[plusMinusA.length - pleib - 1] = -1;
-          }
-        }
-      }
-      console.log("i is " + i);
-      console.log(plusMinusA);
-      var resultLength = 0;
-      for( r = 0; r < plusMinusA.length; r++ ) {
-        resultLength += Math.pow(r+1,indValue) * plusMinusA[r];
-      }
-      if( resultLength == sumValue ) {
-        alert("equation found with array " + plusMinusA );
-      } else if ( resultLength == finalA ) {
-        alert("no equation found");
-      }
-      plusMinusA = [];
-      finalA = [];
-      conValue = 0;
-      indValue = 0;
-      sumValue = 0;
+	select {
+		width: 100%;
+	}
 
-    }
-  }
-  function qwcalc() {
-    var arrayS = document.getElementById("inta").value;
-    var powy = document.getElementById("intit").value;
-    var a = arrayS.split(",");
-    var sumEle = [];
-    for( i = 0; i < a.length; i++ ) {
-      sumEle.push( Math.pow((i + 1),parseInt(powy)) * parseInt(a[i]) );
-    }
-    var resultS = 0;
-    for( i = 0; i < sumEle.length; i++ ) {
-      resultS += sumEle[i];
-    }
-    document.body.innerHTML += "<p><strong>" + arrayS + " times, power of " + powy + ".</strong></p><p>(" + sumEle.join(") + (") + ") = " + resultS + "</p>";
-  }
-  function calc() {
-    var a = [1];
-    var addInt = [];
-    var intt = document.getElementById("intt").value;
-    var cloneI = 0;
-    if( intt > 26 ) {
-      cloneI = 26;
-    } else {
-      cloneI = intt;
-    }
-    for( i = 0; i < cloneI; i++ ) {
-      var arrayL = a.length;
-      for( b = 0; b < arrayL; b++ ) {
-        var newE = a[b];
-        a.push( newE * -1 );
-      }
-    }
+	.card-content {
+		text-align: center;
+	}
 
-    var countT = 1;
-    for( i = 0; i < intt; i++ ) {
-      var inti = document.getElementById("inti").value;
-      var powerOverResult = Math.pow( countT , inti );
-      addInt.push(powerOverResult * a[countT - 1]);
-      countT += 1;
-    }
-    var resultSum = 0;
-    for( i = 0; i < addInt.length; i++ ) {
-      resultSum += addInt[i];
-    }
-    document.body.innerHTML += "<p><strong>" + intt + " times, power of " + inti + ".</strong></p><p>(" + addInt.join(") + (") + ") = " + resultSum + "</p>";
-  }
-</script>
+	.box {
+		overflow: auto;
+	}
+	</style>
+</head>
+
+<body>
+	<div class="card">
+		<header class="card-header">
+			<p class="card-header-title">
+				SumClone
+			</p>
+			<a href="#" class="card-header-icon" aria-label="more options">
+				<span class="icon">
+				<i class="fas fa-angle-down" aria-hidden="true"></i>
+				</span>
+				</a>
+		</header>
+		<div class="card-content">
+			<div class="field">
+				<div class="control">
+					<div class="select is-primary" onchange="switchTag(document.getElementById('modePort').value)">
+						<select id="modePort">
+								<option value="ncc">Normal Clone Calculation</option>
+								<option value="ccc">Climb Clone Calculation</option>
+								<option value="cac">Custom Array Calculator</option>
+								<option value="gefs">Get Equation from Sum</option>
+								<option value="if">Inverse Function</option>
+							</select>
+					</div>
+				</div>
+			</div>
+			<form id="ncc" class="content" action="javascript:clone()">
+				<h2 class="subtitle is-4">Normal Clone Calculation</h2>
+				<input class="input is-primary" id="inttNO" placeholder="stop at">
+				<input class="input is-primary" id="pwof" placeholder="index of">
+				<input class="button is-primary" type="submit" value="Create Clone">
+			</form>
+			<form id="ccc" class="content" action="javascript:calc()">
+				<h2 class="subtitle is-4">Climb Clone Calculation</h2>
+				<input class="input is-primary" id="intt" placeholder="stop at">
+				<input class="input is-primary" id="inti" type="number" placeholder="index of">
+				<input class="button is-primary" type="submit" value="Calculate">
+			</form>
+			<form id="cac" class="content" action="javascript:qwcalc()">
+				<h2 class="subtitle is-4">Custom Array Calculator</h2>
+				<input class="input is-primary" id="inta" placeholder="enter array">
+				<input class="input is-primary" id="intit" type="number" placeholder="index of">
+				<input class="button is-primary" type="submit" value="Calculate">
+			</form>
+			<form id="gefs" class="content" action="javascript:fSum()">
+				<h2 class="subtitle is-4">Get Equation from Sum</h2>
+				<input class="input is-primary" id="sumValue" placeholder="enter sum">
+				<input class="input is-primary" id="conValue" placeholder="stop at">
+				<input class="input is-primary" id="indValue" placeholder="index of">
+				<input class="button is-primary" type="submit" placeholder="find equation">
+			</form>
+			<div id="if">
+				<h2 class="subtitle is-3">Inverse Function</h2>
+				<form class="content" action="javascript:getForm()">
+					<h2 class="subtitle is-4">Calculate formula value</h2>
+					<input class="input is-primary" id="nVar" placeholder="value of n">
+					<input class="button is-primary" type="submit" placeholder="Calculate">
+				</form>
+				<form class="content" action="javascript:eqRow()">
+					<h2 class="subtitle is-4">Get all equation from 1 to formula</h2>
+					<input class="input is-primary" id="iVar" placeholder="index of">
+					<input class="input is-primary" id="rVar" placeholder="repeat until">
+					<input class="input is-primary" id="sVar" placeholder="enter sum">
+					<input class="button is-primary" type="submit" placeholder="Show equations">
+				</form>
+			</div>
+			<hr>
+			<button class="button is-info" onclick="openHist()">View History</button>
+		</div>
+	</div>
+	<div id="currentModal" class="modal">
+		<div class="modal-background"></div>
+		<div class="modal-content">
+			<div class="box" id="currentResults">
+				<h1 class="title is-4">Result</h1>
+				<hr>
+			</div>
+		</div>
+		<button id="closeModBtn" onclick='document.getElementById("currentModal").classList.toggle("is-active")' class="modal-close is-large" aria-label="close"></button>
+	</div>
+	<div id="historyModal" class="modal">
+		<div class="modal-background"></div>
+		<div class="modal-content">
+			<div class="box" id="pastResults">
+				<h1 class="title is-4">History</h1>
+				<div style="text-align: center">
+					<button class="button is-danger">Delete History</button>
+					<hr>
+				</div>
+			</div>
+		</div>
+		<button id="closeModBtn" onclick='document.getElementById("historyModal").classList.toggle("is-active")' class="modal-close is-large" aria-label="close"></button>
+	</div>
+	<div id="processModal" class="modal">
+		<div class="modal-background"></div>
+		<div class="modal-content">
+			<article class="message">
+				<div class="message-header">
+					<p>Calculating...</p>
+					<button class="delete" aria-label="delete"></button>
+				</div>
+				<div class="message-body">
+					This may take a while, depending on the value inputted.
+				</div>
+			</article>
+		</div>
+	</div>
+	<!--script below. still working on it to prevent it from crashing-->
+	<script>
+	window.onload = function() {
+		switchTag(document.getElementById('modePort').value);
+	}
+
+	function switchTag(eleTag) {
+		console.log(eleTag);
+		document.getElementById("ncc").style.display = "none";
+		document.getElementById("ccc").style.display = "none";
+		document.getElementById("cac").style.display = "none";
+		document.getElementById("gefs").style.display = "none";
+		document.getElementById("if").style.display = "none";
+		document.getElementById(eleTag).style.display = "block";
+	}
+
+	function getForm() {
+		document.getElementById("processModal").classList.toggle("is-active");
+		var n = document.getElementById("nVar").value;
+		var nFormula = 1;
+		for (i = 0; i < n; i++) {
+			iSum = i + 1;
+			nFormula = nFormula * iSum;
+		}
+		var preMax = n * (n - 1);
+		var secMax = preMax / 2;
+		var nMax = Math.pow(2, secMax) * nFormula;
+		document.getElementById("currentModal").classList.toggle("is-active");
+		document.getElementById("currentResults").innerHTML = "<p><strong>Formula result (n = " + n + "):</strong></p>" + nMax;
+		document.getElementById("pastResults").innerHTML += "<p><strong>Formula result (n = " + n + "):</strong></p>" + nMax;
+		document.getElementById("processModal").classList.toggle("is-active");
+	}
+
+	function eqRow() {
+		document.getElementById("processModal").classList.toggle("is-active");
+		var n = document.getElementById("iVar").value;
+		var r = document.getElementById("rVar").value;
+		var demandSum = document.getElementById("sVar").value;
+		var addEle = [];
+		var iSum;
+		document.getElementById("currentResults").innerHTML = "<h3>Below are the possible equations found:</strong></h3>";
+		document.getElementById("pastResults").innerHTML += "<h3>Below are the possible equations found:</strong></h3>";
+		//start getting equations
+		var binaryArray = [];
+		var goUp;
+		var checkSum = 0;
+		for (i = 0; i < r; i++) {
+			addEle = [];
+			binaryArray = [];
+			for (j = 0; j < i + 1; j++) {
+				binaryArray.push(1);
+			}
+			goUp = false;
+			for (k = 0; k < Math.pow(2, binaryArray.length) - 1; k++) {
+				if (binaryArray[0] == 1) {
+					binaryArray[0] = -1;
+				} else {
+					binaryArray[0] = 1;
+					goUp = true;
+					for (l = 0; l < binaryArray.length; l++) {
+
+						if (goUp == true) {
+							if (binaryArray[l + 1] == 1) {
+								binaryArray[l + 1] = -1;
+								goUp = false;
+							} else {
+								binaryArray[l + 1] = 1;
+								goUp = true;
+							}
+						}
+					}
+				}
+				checkSum = 0;
+				addEle = [];
+				for (m = 0; m < binaryArray.length; m++) {
+					checkSum += Math.pow((m + 1) * binaryArray[m], n);
+					addEle.push(Math.pow((m + 1) * binaryArray[m], n));
+				}
+				if (checkSum == demandSum) {
+					document.getElementById("currentResults").innerHTML += "<p><strong>Added " + binaryArray.length + " numbers with array of " + binaryArray + "</strong></p>";
+					document.getElementById("currentResults").innerHTML += "<p>" + demandSum + " = (" + addEle.join(") + (") + ")" + "</p>";
+					document.getElementById("pastResults").innerHTML += "<p><strong>Added " + binaryArray.length + " numbers with array of " + binaryArray + "</strong></p>";
+					document.getElementById("pastResults").innerHTML += "<p>" + demandSum + " = (" + addEle.join(") + (") + ")" + "</p>";
+				}
+				checkSum = 0;
+			}
+		}
+		document.getElementById("currentModal").classList.toggle("is-active");
+		document.getElementById("processModal").classList.toggle("is-active");
+	}
+
+	function clone() {
+		document.getElementById("processModal").classList.toggle("is-active");
+		var a = [1];
+		var intt = document.getElementById("inttNO").value;
+		var pwof = document.getElementById("pwof").value;
+		for (i = 0; i < intt; i++) {
+			var arrayL = a.length;
+			for (b = 0; b < arrayL; b++) {
+				var newE = a[b];
+				a.push(Math.pow(newE * -1, pwof));
+			}
+		}
+		document.getElementById("currentResults").innerHTML = "<p><strong>Clone :</strong></p><p>" + a + "</p>";
+		document.getElementById("pastResults").innerHTML += "<p><strong>Clone :</strong></p><p>" + a + "</p>";
+		document.getElementById("currentModal").classList.toggle("is-active");
+		document.getElementById("processModal").classList.toggle("is-active");
+	}
+
+	function fSum() {
+		document.getElementById("processModal").classList.toggle("is-active");
+		console.log("initialized calculation");
+		var conValue = parseInt(document.getElementById("conValue").value);
+		var indValue = parseInt(document.getElementById("indValue").value);
+		var sumValue = parseInt(document.getElementById("sumValue").value);
+		var plusMinusA = [];
+		var finalA = [];
+		for (i = 0; i < conValue; i++) {
+			plusMinusA.push(1);
+			finalA.push(-1);
+		}
+		console.log(Math.pow(2, plusMinusA.length));
+		for (i = 0; i < Math.pow(2, plusMinusA.length) - 1; i++) {
+			if (plusMinusA[plusMinusA.length - 1] == 1) {
+				plusMinusA[plusMinusA.length - 1] = -1;
+			} else {
+				plusMinusA[conValue - 1] = 1;
+				for (k = 0; k < plusMinusA.length - 2; k++) {
+					var pleib = k + 2;
+					if (plusMinusA[plusMinusA.length - pleib] == 1) {
+						plusMinusA[plusMinusA.length - pleib] = -1;
+					} else {
+						plusMinusA[plusMinusA.length - pleib] = 1;
+						plusMinusA[plusMinusA.length - pleib - 1] = -1;
+					}
+				}
+			}
+			console.log("i is " + i);
+			console.log(plusMinusA);
+			var resultLength = 0;
+			for (r = 0; r < plusMinusA.length; r++) {
+				resultLength += Math.pow(r + 1, indValue) * plusMinusA[r];
+			}
+			if (resultLength == sumValue) {
+				alert("equation found with array " + plusMinusA);
+			} else if (resultLength == finalA) {
+				alert("no equation found");
+			}
+			plusMinusA = [];
+			finalA = [];
+			conValue = 0;
+			indValue = 0;
+			sumValue = 0;
+
+		}
+		document.getElementById("currentModal").classList.toggle("is-active");
+		document.getElementById("processModal").classList.toggle("is-active");
+	}
+
+	function qwcalc() {
+		document.getElementById("processModal").classList.toggle("is-active");
+		var arrayS = document.getElementById("inta").value;
+		var powy = document.getElementById("intit").value;
+		var a = arrayS.split(",");
+		var sumEle = [];
+		for (i = 0; i < a.length; i++) {
+			sumEle.push(Math.pow((i + 1), parseInt(powy)) * parseInt(a[i]));
+		}
+		var resultS = 0;
+		for (i = 0; i < sumEle.length; i++) {
+			resultS += sumEle[i];
+		}
+		document.getElementById("currentResults").innerHTML = "<p><strong>" + arrayS + " times, power of " + powy + ".</strong></p><p>(" + sumEle.join(") + (") + ") = " + resultS + "</p>";
+		document.getElementById("pastResults").innerHTML += "<p><strong>" + arrayS + " times, power of " + powy + ".</strong></p><p>(" + sumEle.join(") + (") + ") = " + resultS + "</p>";
+		document.getElementById("currentModal").classList.toggle("is-active");
+	}
+
+	function calc() {
+		var a = [1];
+		var addInt = [];
+		var intt = document.getElementById("intt").value;
+		var cloneI = 0;
+		if (intt > 26) {
+			cloneI = 26;
+		} else {
+			cloneI = intt;
+		}
+		for (i = 0; i < cloneI; i++) {
+			var arrayL = a.length;
+			for (b = 0; b < arrayL; b++) {
+				var newE = a[b];
+				a.push(newE * -1);
+			}
+		}
+
+		var countT = 1;
+		for (i = 0; i < intt; i++) {
+			var inti = document.getElementById("inti").value;
+			var powerOverResult = Math.pow(countT, inti);
+			addInt.push(powerOverResult * a[countT - 1]);
+			countT += 1;
+		}
+		var resultSum = 0;
+		for (i = 0; i < addInt.length; i++) {
+			resultSum += addInt[i];
+		}
+		document.getElementById("currentResults").innerHTML += "<p><strong>" + intt + " times, power of " + inti + ".</strong></p><p>(" + addInt.join(") + (") + ") = " + resultSum + "</p>";
+		document.getElementById("pastResults").innerHTML += "<p><strong>" + intt + " times, power of " + inti + ".</strong></p><p>(" + addInt.join(") + (") + ") = " + resultSum + "</p>";
+		document.getElementById("currentModal").classList.toggle("is-active");
+		document.getElementById("processModal").classList.toggle("is-active");
+	}
+
+	function openHist() {
+		document.getElementById("historyModal").classList.toggle("is-active");
+	}
+	</script>
+</body>
+
+</html>
