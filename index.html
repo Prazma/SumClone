@@ -8,6 +8,9 @@
 	<meta name="description" content="The official calculator for SumClone mathematics project. May crash depending on the device computing power">
 	<link rel="stylesheet" href="https://bulma.io/css/bulma-docs.min.css?v=201804181630">
 	<style>
+  html {
+    background: #f9f9f9;
+  }
 	.is-info,
 	.is-primary {
 		max-width: 300px;
@@ -16,7 +19,9 @@
 		margin-right: auto;
 		margin-left: auto;
 	}
-
+  .card {
+    width: 90%;
+  }
 	.button {
 		min-width: 300px;
 	}
@@ -130,7 +135,7 @@
 			<div class="box" id="pastResults">
 				<h1 class="title is-4">History</h1>
 				<div style="text-align: center">
-					<button class="button is-danger">Delete History</button>
+					<button class="button is-danger" onclick="delHis()">Delete History</button>
 					<hr>
 				</div>
 			</div>
@@ -366,6 +371,9 @@
 	function openHist() {
 		document.getElementById("historyModal").classList.toggle("is-active");
 	}
+  function delHis() {
+    document.getElementById("pastResults").innerHTML = '<h1 class="title is-4">History</h1><div style="text-align: center"><button class="button is-danger" onclick="delHis()">Delete History</button><hr></div>';
+  }
 	</script>
 </body>
 
